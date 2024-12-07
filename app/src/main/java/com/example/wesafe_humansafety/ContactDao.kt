@@ -10,12 +10,12 @@ import androidx.room.Query
 interface ContactDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(contactModel: ContactModel)
+    suspend fun insert(contact: ContactModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(contactModelList: List<ContactModel>)
+    suspend fun insertAll(contactList: List<ContactModel>)
 
-    @Query("SELECT * FROM contactmodel")
+    @Query("SELECT * FROM contact_table")
     suspend fun getAllContacts(): List<ContactModel>
 
 
