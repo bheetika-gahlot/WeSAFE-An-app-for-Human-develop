@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">WESAFE_human safety</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="security">Security</string>
+    <string name="sos">SOS</string>
+    <string name="in_case_of_emergency_keep_telling_family_members_to_contact_me">In case of emergency, keep telling family members to contact me</string>
+    <string name="guard">GUARD</string>
+    <string name="open_when_you_are_on_a_potentially_dangerous_journey">Open when you are on a potentially dangerous journey</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </string>
+    <string name="home">Home</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="profile">Profile</string>
+    <string name="b_guard">Guard</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="my_family">My Family</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user">User</string>
+
+</resources>
