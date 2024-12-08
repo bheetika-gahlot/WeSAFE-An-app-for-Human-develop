@@ -58,6 +58,10 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
+
+    //Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
     // Firebase Authentication
     implementation(libs.firebase.auth)
     implementation(libs.firebase.auth.ktx)

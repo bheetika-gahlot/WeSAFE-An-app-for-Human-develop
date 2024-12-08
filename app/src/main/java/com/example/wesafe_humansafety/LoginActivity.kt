@@ -78,7 +78,16 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = auth.currentUser
+
+                    // Store login status in shared preferences
+                    SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,true)
+
+                    //val user = auth.currentUser
+
+                    //Navigate to HomeActivity
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                     // Proceed to the next screen or handle the signed-in user
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)

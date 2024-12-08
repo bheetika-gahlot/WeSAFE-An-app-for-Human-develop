@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.example.wesafe_humansafety.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,12 +26,15 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        return binding.root
+//        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -55,9 +62,9 @@ class HomeFragment : Fragment() {
         )
         val adapter = MemberAdapter(listMembers)
 
-        val recycler = requireView().findViewById<RecyclerView>(R.id.recycler_member)
-        recycler.layoutManager = LinearLayoutManager(requireContext())
-        recycler.adapter = adapter
+
+        binding.recyclerMember.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerMember.adapter = adapter
 
 
 
@@ -77,10 +84,17 @@ class HomeFragment : Fragment() {
         }
 
 
-        val inviteRecycler = requireView().findViewById<RecyclerView>(R.id.recycler_invite)
-        inviteRecycler.layoutManager =
+
+        binding.recyclerInvite.layoutManager =
             LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        inviteRecycler.adapter = inviteAdapter
+        binding.recyclerInvite.adapter = inviteAdapter
+
+        val threeDots = requireView().findViewById<ImageView>(R.id.icon_three_dots)
+        threeDots.setOnClickListener{
+            SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,false)
+
+            FirebaseAuth.getInstance().signOut()
+        }
 
     }
 

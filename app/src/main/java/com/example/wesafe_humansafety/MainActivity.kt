@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.wesafe_humansafety.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -20,16 +21,20 @@ class MainActivity : AppCompatActivity() {
     )
     val permissionCode = 78
 
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        setContentView(R.layout.activity_main)
 
         askforPermission()
 
-        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        bottomBar.setOnItemSelectedListener {
+        binding.bottomNavigation.setOnItemSelectedListener {
 
             when (it.itemId) {
                 R.id.nav_guard -> {
@@ -51,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
-        bottomBar.selectedItemId = R.id.nav_home
+        binding.bottomNavigation.selectedItemId = R.id.nav_home
     }
 
     private fun askforPermission() {
