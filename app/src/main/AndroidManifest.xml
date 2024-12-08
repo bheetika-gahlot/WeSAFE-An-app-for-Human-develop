@@ -39,7 +39,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAYI-LubDPHt9iEvGd0aE02f1TLmlal7SQ" />
 
-<!--        Login-->
+        <meta-data
+            android:name="com.google.android.gms.auth.api.credentials.CREDENTIALS"
+            android:value="@string/your_web_client_id" />
+        <!--        Login-->
         <activity
             android:name=".LoginActivity"
             android:exported="true">

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.google.gms.google.services) // Add this line for kapt support
+
 }
 
 android {
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.wesafe_humansafety"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -47,11 +48,22 @@ android {
 }
 
 dependencies {
+    // Core AndroidX and Material libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Lifecycle and Navigation components
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // Firebase Authentication
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
+    implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In
+
+    // UI libraries
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -60,12 +72,19 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.play.services.maps)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.firebase.auth)
 
-    // Testing Dependencies
+    // Coroutines for background processing
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Room database
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    // Google Maps API
+    implementation(libs.play.services.maps)
+
+    // Testing libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,13 +92,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    // Coroutines
-    implementation(libs.kotlinx.coroutines.android)
-
-    // Room Components
-    implementation(libs.androidx.room.runtime) // Runtime library
-    kapt(libs.androidx.room.compiler)          // Annotation processor
-    implementation(libs.androidx.room.ktx)   // Optional Kotlin extensions
-    
 }
+
