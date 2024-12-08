@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
                     //val user = auth.currentUser
 
                     //Navigate to HomeActivity
-                    val intent = Intent(this, HomeActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                     // Proceed to the next screen or handle the signed-in user

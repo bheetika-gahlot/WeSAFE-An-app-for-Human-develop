@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     id("org.jetbrains.kotlin.kapt")
-    alias(libs.plugins.google.gms.google.services) // Add this line for kapt support
+    alias(libs.plugins.google.gms.google.services) apply true // Add this line for kapt support
 
 }
 
@@ -60,7 +60,10 @@ dependencies {
 
 
     //Firestore
+
+    implementation(platform(libs.firebase.bom))
     implementation("com.google.firebase:firebase-firestore-ktx")
+
 
     // Firebase Authentication
     implementation(libs.firebase.auth)
