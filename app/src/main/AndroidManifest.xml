@@ -39,16 +39,26 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAYI-LubDPHt9iEvGd0aE02f1TLmlal7SQ" />
 
+<!--        Login-->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
 <!--            android:label="HomeScreen"-->
-<!--            tools:ignore="WrongManifestParent">-->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--&lt;!&ndash;            tools:ignore="WrongManifestParent">&ndash;&gt;-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

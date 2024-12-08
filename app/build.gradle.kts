@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
-    id("org.jetbrains.kotlin.kapt") // Add this line for kapt support
+    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.google.gms.google.services) // Add this line for kapt support
 }
 
 android {
@@ -62,6 +63,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.firebase.auth)
 
     // Testing Dependencies
     testImplementation(libs.junit)
@@ -76,8 +78,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     // Room Components
-    implementation("androidx.room:room-runtime:2.6.1") // Runtime library
-    kapt("androidx.room:room-compiler:2.6.1")          // Annotation processor
-    implementation("androidx.room:room-ktx:2.6.1")   // Optional Kotlin extensions
+    implementation(libs.androidx.room.runtime) // Runtime library
+    kapt(libs.androidx.room.compiler)          // Annotation processor
+    implementation(libs.androidx.room.ktx)   // Optional Kotlin extensions
     
 }
