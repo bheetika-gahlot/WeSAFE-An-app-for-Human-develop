@@ -59,7 +59,7 @@ android:layout_marginTop="16dp">
     android:layout_marginLeft="8dp"/>
 
 <View
-    android:layout_width="1dp"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
     android:background="@color/green"
     android:layout_marginLeft="16dp"
@@ -88,7 +88,7 @@ android:layout_marginTop="16dp">
     android:layout_marginRight="16dp"/>
 
 <TextView
-    android:text="o+"
+    android:text="B+"
     android:textSize="18sp"
     android:textStyle="bold"
     android:layout_width="wrap_content"
@@ -102,5 +102,25 @@ android:layout_marginTop="16dp">
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"/>
 
+
+
 </LinearLayout>
+    <!-- SOS Button -->
+    <Button
+        android:id="@+id/sosButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send SOS"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"/>
+
+    <!-- Call Button -->
+    <Button
+        android:id="@+id/callButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
     </LinearLayout>
