@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "65660107394",
+    "project_id": "wesafe-human-safety-6cc67",
+    "storage_bucket": "wesafe-human-safety-6cc67.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65660107394:android:9a026ba8f6b7feff00d29b",
+        "android_client_info": {
+          "package_name": "com.example.wesafe_humansafety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65660107394-ac1t2hnh9jb3jhcc4ue4if533elrp2bo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wesafe_humansafety",
+            "certificate_hash": "a67d2844044ef612e9d4f7760b19cdf8542ae5d1"
+          }
+        },
+        {
+          "client_id": "65660107394-dao7n5a8qsclej86oljf2g4rf0tln3t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt8X0Q68f-z1KAKlW1c3YqxpTM0txbTRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65660107394-dao7n5a8qsclej86oljf2g4rf0tln3t0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
