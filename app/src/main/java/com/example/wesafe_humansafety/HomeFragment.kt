@@ -1,6 +1,7 @@
 package com.example.wesafe_humansafety
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
@@ -21,9 +22,16 @@ import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
+    lateinit var inviteAdapter: InviteAdapter
+    lateinit var mContext: Context
     private val listContacts: ArrayList<ContactModel> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 
     lateinit var binding: FragmentHomeBinding
@@ -63,7 +71,7 @@ class HomeFragment : Fragment() {
         val adapter = MemberAdapter(listMembers)
 
 
-        binding.recyclerMember.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerMember.layoutManager = LinearLayoutManager(mContext)
         binding.recyclerMember.adapter = adapter
 
 
@@ -86,7 +94,7 @@ class HomeFragment : Fragment() {
 
 
         binding.recyclerInvite.layoutManager =
-            LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+            LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
         binding.recyclerInvite.adapter = inviteAdapter
 
         val threeDots = requireView().findViewById<ImageView>(R.id.icon_three_dots)

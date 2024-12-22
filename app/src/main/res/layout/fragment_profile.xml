@@ -1,21 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/bg_gradient">
+<!-- Profile Image -->
+<ImageView
+    android:id="@+id/profile_image"
+    android:src="@drawable/img"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="24dp"
+    android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_16dp"
-        android:text="@string/user"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dimen_16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Profile Name -->
+<TextView
+android:id="@+id/profile_name"
+android:text="Bheetika Gahlot"
+android:textSize="24sp"
+android:textStyle="bold"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_horizontal"
+android:layout_marginTop="16dp"/>
+
+    <!-- Profile Bio -->
+<TextView
+android:id="@+id/profile_bio"
+android:text="Student in ABESIT"
+android:textSize="18sp"
+android:textColor="@color/darker_gray"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_horizontal"
+android:layout_marginTop="8dp"/>
+
+    <!-- Profile Stats -->
+<LinearLayout
+android:orientation="horizontal"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_horizontal"
+android:layout_marginTop="16dp">
+
+<TextView
+    android:text="56"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+<TextView
+    android:text="weight"
+    android:textSize="14sp"
+    android:textColor="@color/darker_gray"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"/>
+
+<View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"/>
+
+<TextView
+    android:text="168"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+<TextView
+    android:text="centimetres"
+    android:textSize="14sp"
+    android:textColor="@color/darker_gray"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"/>
+
+<View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"/>
+
+<TextView
+    android:text="o+"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+<TextView
+    android:text="Blood Group"
+    android:textSize="14sp"
+    android:textColor="@color/darker_gray"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"/>
+
+</LinearLayout>
+    </LinearLayout>

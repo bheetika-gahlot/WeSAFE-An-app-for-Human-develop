@@ -4,13 +4,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.wesafe_humansafety.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,14 +25,18 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 //        setContentView(R.layout.activity_main)
 
+
         askforPermission()
+
 
 //        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
@@ -57,9 +63,42 @@ class MainActivity : AppCompatActivity() {
 
         }
         binding.bottomNavigation.selectedItemId = R.id.nav_home
+
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        val name = currentUser?.displayName.toString()
+        val mail = currentUser?.email.toString()
+        val phoneNumber = currentUser?.phoneNumber.toString()
+        val imageUrl = currentUser?.photoUrl.toString()
+
+
+        val db = Firebase.firestore
+        //Create a new user with a first and last name
+        val user = hashMapOf(
+            "name" to name,
+            "mail" to mail,
+            "phoneNumber" to phoneNumber,
+            "imageUrl" to imageUrl
+        )
+
+        db.collection("users").document(mail).set(user).addOnSuccessListener { }
+            .addOnFailureListener { }
+
+//        //Add a new document with a generated ID
+//        db.collection("users")
+//            .add(user)
+//            .addOnSuccessListener { documentReference ->
+//                Log.d("FireStore89", "DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//                Log.w("FireStore89", "Error adding document", e)
+//            }
+
+
     }
 
     private fun askforPermission() {
+//        val permissions = null
         ActivityCompat.requestPermissions(this,permissions,permissionCode)
     }
 
@@ -94,6 +133,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun allPermissionGranted(): Boolean {
+
         for(item in permissions){
             if(ContextCompat.checkSelfPermission(this,item)!= PackageManager.PERMISSION_GRANTED){
                 return false
@@ -102,3 +142,4 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 }
+
