@@ -73,8 +73,9 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
 
         val sosButton: Button = view.findViewById(R.id.sosButton)
         sosButton.setOnClickListener {
-            sendSOSMessage(phoneNumber, sosMessage)
-            sendSOSMessage(policePhoneNumber, sosMessage)
+            // Fetch location and send SOS
+            sendLocationBasedSOS(phoneNumber)
+            sendLocationBasedSOS(policePhoneNumber)
         }
         val callButton: Button = view.findViewById(R.id.callButton)
         callButton.setOnClickListener {
