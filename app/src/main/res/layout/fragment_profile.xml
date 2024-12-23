@@ -28,7 +28,7 @@ android:layout_marginTop="16dp"/>
         android:id="@+id/profile_email"
         android:text="Email"
         android:textSize="18sp"
-        android:textColor="@color/darker_gray"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@ android:layout_marginTop="16dp"/>
 android:id="@+id/profile_bio"
 android:text="Student in ABESIT"
 android:textSize="18sp"
-android:textColor="@color/darker_gray"
+android:textColor="@color/black"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
@@ -63,13 +63,13 @@ android:layout_marginTop="16dp">
 <TextView
     android:text="weight"
     android:textSize="14sp"
-    android:textColor="@color/darker_gray"
+    android:textColor="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"/>
 
 <View
-    android:layout_width="0dp"
+    android:layout_width="1dp"
     android:layout_height="match_parent"
     android:background="@color/green"
     android:layout_marginLeft="16dp"
@@ -85,7 +85,7 @@ android:layout_marginTop="16dp">
 <TextView
     android:text="centimetres"
     android:textSize="14sp"
-    android:textColor="@color/darker_gray"
+    android:textColor="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"/>
@@ -107,7 +107,7 @@ android:layout_marginTop="16dp">
 <TextView
     android:text="Blood Group"
     android:textSize="14sp"
-    android:textColor="@color/darker_gray"
+    android:textColor="@color/black"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"/>

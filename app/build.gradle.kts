@@ -89,6 +89,7 @@ dependencies {
 
     // Google Maps API
     implementation(libs.play.services.maps)
+    implementation (libs.play.services.location)
 
     // Testing libraries
     testImplementation(libs.junit)

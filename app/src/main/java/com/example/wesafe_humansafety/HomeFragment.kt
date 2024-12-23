@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
     lateinit var inviteAdapter: InviteAdapter
     lateinit var mContext: Context
     private val listContacts: ArrayList<ContactModel> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     }
 
     lateinit var binding: FragmentHomeBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,10 +48,12 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("FetchContact89", "onViewCreated: ")
+        //Sample list of members
         val listMembers = listOf<MemberModel>(
             MemberModel("Bheetika Gahlot",
                 address = "43/1 @nd floor kapda mill,panchwati,Ghaziabad",
@@ -70,7 +74,10 @@ class HomeFragment : Fragment() {
         )
         val adapter = MemberAdapter(listMembers)
 
+        // Initialize InviteAdapter
+        inviteAdapter = InviteAdapter(listContacts)
 
+        // Set layout manager and adapter for recyclerInvite
         binding.recyclerMember.layoutManager = LinearLayoutManager(mContext)
         binding.recyclerMember.adapter = adapter
 
@@ -97,6 +104,7 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
         binding.recyclerInvite.adapter = inviteAdapter
 
+        // Handle three dots click
         val threeDots = requireView().findViewById<ImageView>(R.id.icon_three_dots)
         threeDots.setOnClickListener{
             SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,false)

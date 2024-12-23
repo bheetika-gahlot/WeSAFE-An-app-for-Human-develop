@@ -19,6 +19,8 @@ import android.hardware.SensorManager
 import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -26,15 +28,19 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
 
     private val REQUEST_SMS_PERMISSION = 1
     private val REQUEST_CALL_PERMISSION = 2
+    private val REQUEST_LOCATION_PERMISSION = 3
     private val phoneNumber = "9717024185"  // Emergency contact's phone number
     private val policePhoneNumber = "112"  // police phone number
-    private val sosMessage = "SOS! I need help. My location is: [Add Location]"
+    private val sosMessage = "SOS! I need help. My location is: "
 
     private lateinit var sensorManager: SensorManager
     private lateinit var shakeDetector: ShakeDetector
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
     }
 
@@ -43,6 +49,11 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        // Initialize fusedLocationClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        // Check permissions
+        checkPermissions()
 
         // Check for SMS permission
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
@@ -63,12 +74,12 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
         val sosButton: Button = view.findViewById(R.id.sosButton)
         sosButton.setOnClickListener {
             sendSOSMessage(phoneNumber, sosMessage)
-            //sendSOSMessage(policePhoneNumber, sosMessage)
+            sendSOSMessage(policePhoneNumber, sosMessage)
         }
         val callButton: Button = view.findViewById(R.id.callButton)
         callButton.setOnClickListener {
             makePhoneCall(phoneNumber)
-            //makePhoneCall(policePhoneNumber)
+            makePhoneCall(policePhoneNumber)
         }
         // Display user information
         val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
@@ -89,6 +100,32 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
         }
         return view
     }
+    private fun checkPermissions() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.SEND_SMS), REQUEST_SMS_PERMISSION)
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PERMISSION)
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        }
+    }
+    private fun sendLocationBasedSOS(phoneNumber: String) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val message = "SOS! I need help. My location is: https://maps.google.com/?q=${location.latitude},${location.longitude}"
+                    sendSOSMessage(phoneNumber, message)
+                } else {
+                    Toast.makeText(requireContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(requireContext(), "Location permission not granted.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun sendSOSMessage(phoneNumber: String, message: String) {
         try {
             val smsManager: SmsManager = SmsManager.getDefault()
@@ -110,9 +147,9 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
     }
     override fun onShake() {
         sendSOSMessage(phoneNumber, sosMessage)
-        sendSOSMessage(policePhoneNumber, sosMessage)
+        //sendSOSMessage(policePhoneNumber, sosMessage)
         makePhoneCall(phoneNumber)
-        makePhoneCall(policePhoneNumber)
+        //makePhoneCall(policePhoneNumber)
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
