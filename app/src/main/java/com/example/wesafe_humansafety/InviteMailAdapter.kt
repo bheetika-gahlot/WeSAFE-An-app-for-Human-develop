@@ -46,7 +46,7 @@ class InviteMailAdapter(
 
     interface OnActionClick{
         fun onAcceptClick(mail:String)
-        fun onDenyClick(mail:String)
+        fun onDenyClick(mail: String)
     }
 
 }

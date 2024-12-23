@@ -17,13 +17,15 @@ import com.google.firebase.firestore.firestore
 class GuardFragment : Fragment(), InviteMailAdapter.OnActionClick {
 
     lateinit var mContext: Context
+    lateinit var binding: FragmentGuardBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
 
-    lateinit var binding: FragmentGuardBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +60,7 @@ class GuardFragment : Fragment(), InviteMailAdapter.OnActionClick {
                     for (item in it.result) {
                         if (item.get("invite_status") == 0L) {
                             list.add(item.id)
+
                         }
                     }
                     Log.d("invites89", "getInvites: $list")
@@ -124,7 +127,7 @@ class GuardFragment : Fragment(), InviteMailAdapter.OnActionClick {
 
     override fun onDenyClick(mail: String) {
         Log.d("invite89", "onDenyClick: $mail")
-        Log.d("Mail89", "sendInvite: $mail")
+        // Log.d("Mail89", "sendInvite: $mail")
         val firestore = Firebase.firestore
 
         val data = hashMapOf(
