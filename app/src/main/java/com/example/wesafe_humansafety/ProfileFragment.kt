@@ -17,6 +17,10 @@ import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.net.Uri
+import android.widget.ImageView
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
 
@@ -65,6 +69,23 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
         callButton.setOnClickListener {
             makePhoneCall(phoneNumber)
             //makePhoneCall(policePhoneNumber)
+        }
+        // Display user information
+        val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val profileName: TextView = view.findViewById(R.id.profile_name)
+            val profileEmail: TextView = view.findViewById(R.id.profile_email)
+            val profileImage: ImageView = view.findViewById(R.id.profile_image)
+
+            profileName.text = user.displayName ?: "Name not available"
+            profileEmail.text = user.email ?: "Email not available"
+
+            // Load user's profile picture if available
+            val photoUrl = user.photoUrl
+            if (photoUrl != null) {
+                // Use an image loading library like Glide or Picasso to load the image
+                //Glide.with(this).load(photoUrl).into(profileImage)
+            }
         }
         return view
     }
@@ -120,6 +141,10 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
                 }
             }
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sensorManager.unregisterListener(shakeDetector)
     }
         companion object {
 

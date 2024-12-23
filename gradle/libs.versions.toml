@@ -28,6 +28,9 @@ roomRuntime = "2.6.1"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuthKtx = "23.1.0"
 
+glide = "4.12.0"  # Add this line for Glide version
+glideCompiler = "4.12.0"  # Add this line for Glide compiler version
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -64,6 +67,9 @@ play-services-maps = { group = "com.google.android.gms", name = "play-services-m
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
+
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }  # Add this line for Glide
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glideCompiler" }  # Add this line for Glide compiler
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
