@@ -115,16 +115,22 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
-                    val message = "SOS! I need help. My location is: https://maps.google.com/?q=${location.latitude},${location.longitude}"
+                    val latitude = location.latitude
+                    val longitude = location.longitude
+                    val message = "SOS! I need help. My location is: https://maps.google.com/?q=$latitude,$longitude"
                     sendSOSMessage(phoneNumber, message)
                 } else {
                     Toast.makeText(requireContext(), "Unable to fetch location.", Toast.LENGTH_SHORT).show()
                 }
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), "Error fetching location: ${it.message}", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(requireContext(), "Location permission not granted.", Toast.LENGTH_SHORT).show()
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
         }
     }
+
 
     private fun sendSOSMessage(phoneNumber: String, message: String) {
         try {
@@ -132,10 +138,10 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
             smsManager.sendTextMessage(phoneNumber, null, message, null, null)
             Toast.makeText(requireContext(), "SOS message sent!", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
-            Toast.makeText(requireContext(), "Failed to send SOS message.", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(requireContext(), "Failed to send SOS message.", Toast.LENGTH_LONG).show()
         }
     }
+
     private fun makePhoneCall(phoneNumber: String) {
         try {
             val intent = Intent(Intent.ACTION_CALL)
@@ -145,11 +151,16 @@ class ProfileFragment : Fragment(), ShakeDetector.OnShakeListener {
             Toast.makeText(requireContext(), "Failed to make a call.", Toast.LENGTH_LONG).show()
         }
     }
+
     override fun onShake() {
-        sendSOSMessage(phoneNumber, sosMessage)
+        //sendSOSMessage(phoneNumber, sosMessage)
         //sendSOSMessage(policePhoneNumber, sosMessage)
-        makePhoneCall(phoneNumber)
+        //makePhoneCall(phoneNumber)
         //makePhoneCall(policePhoneNumber)
+
+        // Fetch location and send SOS
+        sendLocationBasedSOS(phoneNumber)
+        sendLocationBasedSOS(policePhoneNumber)
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
